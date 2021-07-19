@@ -10,19 +10,21 @@
     <div v-for="product in products" v-bind:key="product.id">
       <p>Name: {{ product.name }}</p>
       <p>Price: {{ product.price }}</p>
-      <!-- <p>Image URL: {{ product.image_url }}</p>
-      <img v-bind:src="product.image_url"> -->
+      <p>Image URL: {{ product.image_url }}</p>
+      <img v-bind:src="product.image_url">
       <p><button v-on:click="productShow(product)">Show more info</button></p>
       <hr>
     </div>
-    <dialog id="product details">
+    <dialog id="product-details">
       <form method="dialog">
         <p>Product:</p>
-        <p>Name: {{ currentProduct.name }} </p>
-        <p>Price: {{ currentProduct.price }} </p>
-        <p>Description: {{ currentProduct.name }} </p>
-        <p>Image URL: {{ currentProduct.image_url }} </p>
+        <p>Name: {{ currentProduct.name }}</p>
+        <p>Price: {{ currentProduct.price }}</p>
+        <p>Description: {{ currentProduct.name }}</p>
+  }     <p>Image URL: {{ currentProduct.image_url }}</p>
         <button>Close</button>
+      </form>
+    </dialog>
   </div>
 </template>
 <style></style>
@@ -34,6 +36,8 @@ export default {
       message: "Welcome to the simple app!",
       products: [],
       newProductParams: {},
+      errors: [],
+      currentProduct: {}
     };
   },
   created: function () {
@@ -61,8 +65,12 @@ export default {
         this.newProductParams = {}
       });
     },
-    productShow: function (theProduct){
-
+    productShow: function (theProduct) {
+      console.log(theProduct);
+      this.currentProduct = theProduct;
+      console.log("showing product");
+      document.querySelector("#product-details").showModal();
+    }
   }
 };
 </script>
